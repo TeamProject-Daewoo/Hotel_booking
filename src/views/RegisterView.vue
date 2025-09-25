@@ -8,21 +8,10 @@
           <div class="input-group">
             <label for="email">이메일 (아이디로 사용)</label>
             <div class="input-with-button">
-              <input
-                type="email"
-                id="email"
-                v-model="formData.username"
-                placeholder="이메일 주소를 입력하세요"
-                :disabled="isEmailVerified"
-                required
-                @keydown="preventSpaces"
-              />
-              <button
-                type="button"
-                @click="sendVerificationCode"
-                :disabled="isEmailVerified || !formData.username"
-                class="inline-button"
-              >
+              <input type="email" id="email" v-model="formData.username" placeholder="이메일 주소를 입력하세요"
+                :disabled="isEmailVerified" required @keydown="preventSpaces" />
+              <button type="button" @click="sendVerificationCode" :disabled="isEmailVerified || !formData.username"
+                class="inline-button">
                 {{ sendButtonText }}
               </button>
             </div>
@@ -32,62 +21,36 @@
           <div v-if="isCodeSent && !isEmailVerified" class="input-group">
             <label for="verificationCode">인증번호</label>
             <div class="input-with-button">
-              <input
-                type="text"
-                id="verificationCode"
-                v-model="verificationCode"
-                placeholder="받으신 인증번호를 입력하세요"
-                required
-                @keydown="preventSpaces"
-                maxlength="6"  @input="handleCodeInput" 
-              />
+              <input type="text" id="verificationCode" v-model="verificationCode" placeholder="받으신 인증번호를 입력하세요" required
+                @keydown="preventSpaces" maxlength="6" @input="handleCodeInput" />
               <button type="button" @click="verifyCode" class="inline-button">
                 인증번호 확인
               </button>
             </div>
-            <p
-              v-if="verificationMessage"
-              :class="
-                verificationMessageType === 'success'
-                  ? 'success-text'
-                  : verificationMessageType === 'error'
+            <p v-if="verificationMessage" :class="verificationMessageType === 'success'
+                ? 'success-text'
+                : verificationMessageType === 'error'
                   ? 'error-text'
                   : 'info-text'
-              "
-            >
+              ">
               {{ verificationMessage }}
             </p>
-                          <p v-if="isCodeSent && !isEmailVerified" class="info-text">
-  남은 시간: {{ formattedTime }}
-</p>
+            <p v-if="isCodeSent && !isEmailVerified" class="info-text">
+              남은 시간: {{ formattedTime }}
+            </p>
           </div>
 
           <div class="input-group">
             <label for="password">비밀번호</label>
-            <input
-              type="password"
-              id="password"
-              v-model="formData.password"
-              placeholder="비밀번호를 입력하세요"
-              required
-              @keydown="preventSpaces"
-            />
+            <input type="password" id="password" v-model="formData.password" placeholder="비밀번호를 입력하세요" required
+              @keydown="preventSpaces" />
           </div>
 
           <div class="input-group">
             <label for="confirmPassword">비밀번호 확인</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              v-model="formData.confirmPassword"
-              placeholder="비밀번호를 다시 입력하세요"
-              required
-              @keydown="preventSpaces"
-            />
-            <p
-              v-if="formData.confirmPassword"
-              :class="passwordsMatch ? 'success-text' : 'error-text'"
-            >
+            <input type="password" id="confirmPassword" v-model="formData.confirmPassword" placeholder="비밀번호를 다시 입력하세요"
+              required @keydown="preventSpaces" />
+            <p v-if="formData.confirmPassword" :class="passwordsMatch ? 'success-text' : 'error-text'">
               {{
                 passwordsMatch
                   ? "비밀번호가 일치합니다."
@@ -98,39 +61,27 @@
 
           <div class="input-group">
             <label for="name">닉네임</label>
-            <input
-              type="text"
-              id="name"
-              v-model="formData.name"
-              placeholder="최대 7글자"
-              maxlength="7"
-              required
-              @keydown="preventSpaces"
-            />
+            <input type="text" id="name" v-model="formData.name" placeholder="최대 7글자" maxlength="7" required
+              @keydown="preventSpaces" />
           </div>
 
           <div class="input-group">
             <label for="phone">휴대폰 번호</label>
-            <input
-              type="tel"
-              id="phone"
-              v-model="formData.phoneNumber"
-              placeholder="'-' 없이 숫자만 입력하세요"
-              maxlength="13"
-              required
-            />
+            <input type="tel" id="phone" v-model="formData.phoneNumber" placeholder="'-' 없이 숫자만 입력하세요" maxlength="13"
+              required />
           </div>
 
           <div class="options">
-  <div class="remember-me">
-    <input type="checkbox" id="agree" v-model="formData.agree" />
-    <label for="agree">
-      <a href="#" @click.prevent="openTermsModal" class="terms-link">이용약관</a>에 동의합니다.
-    </label>
-  </div>
-</div>
+            <div class="remember-me">
+              <input type="checkbox" id="agree" v-model="formData.agree" />
+              <label for="agree">
+                <a href="#" @click.prevent="openTermsModal" class="terms-link">이용약관</a>에 동의합니다.
+              </label>
+            </div>
+          </div>
 
-          <button type="submit" class="auth-button" :disabled="!isFormValid" :class="{ 'disabled-button': !isFormValid }">
+          <button type="submit" class="auth-button" :disabled="!isFormValid"
+            :class="{ 'disabled-button': !isFormValid }">
             계정 생성
           </button>
         </form>
@@ -147,8 +98,7 @@
     <div class="image-container">
       <img
         src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80"
-        alt="Hotel pool view"
-      />
+        alt="Hotel pool view" />
     </div>
   </div>
 </template>
@@ -270,7 +220,7 @@ const sendVerificationCode = async () => {
     verificationMessage.value =
       "인증번호가 발송되었습니다. 이메일을 확인해주세요.";
 
-      startTimer();
+    startTimer();
 
   } catch (error) {
     verificationMessageType.value = "error";
@@ -289,11 +239,11 @@ const passwordsMatch = computed(() => {
 // 최종 폼 유효성 검사 (계정 생성 버튼 활성화 조건)
 const isFormValid = computed(() => {
   const requiredFields = [
-    formData.user_name,
+    formData.username,
     formData.password,
     formData.confirmPassword,
     formData.name,
-    formData.phone
+    formData.phoneNumber
   ];
   const allFieldsFilled = requiredFields.every(field => field && field.trim() !== '');
   // 이메일 인증이 완료되었고, 비밀번호가 일치하며, 약관에 동의했는지 확인
@@ -341,12 +291,22 @@ const startTimer = () => {
   }, 1000); // 1초마다 실행
 };
 
+const isValidPhoneNumber = (phone) => {
+  const regex = /^010-\d{4}-\d{4}$/; // '010-숫자4개-숫자4개'
+  return regex.test(phone);
+};
+
 // mm:ss 형식으로 변환하는 computed
 const formattedTime = computed(() => {
   const minutes = Math.floor(timeLeft.value / 60);
   const seconds = timeLeft.value % 60;
   return `${String(minutes).padStart(1, "0")}:${String(seconds).padStart(2, "0")}`;
 });
+
+const hasIncompleteKorean = (name) => {
+  const regex = /[ㄱ-ㅎ|ㅏ-ㅣ]/; // 단일 자음 또는 모음
+  return regex.test(name);
+};
 
 
 
@@ -356,23 +316,35 @@ const handleRegister = async () => {
     return;
   }
 
+   if (hasIncompleteKorean(formData.name)) {
+    uiStore.openModal('입력 오류', '닉네임에 완성되지 않은 한글(자음/모음)을 사용할 수 없습니다.');
+    return;
+  }
+
+      if (!isValidPhoneNumber(formData.phoneNumber)) {
+    uiStore.openModal('입력 오류', "휴대폰 번호는 '010'으로 시작하는 11자리 숫자여야 합니다.");
+    return;
+  }
+
   try {
-    await api.post('/api/auth/sign-up', { 
+
+    await api.post('/api/auth/sign-up', {
       username: formData.username,
       password: formData.password,
       name: formData.name,
       phoneNumber: formData.phoneNumber,
-      role: formData.role, });
-      uiStore.openModal('회원가입이 완료되었습니다.');
+      role: formData.role,
+    });
+    uiStore.openModal('회원가입이 완료되었습니다.');
     router.push('/');
 
   } catch (error) {
     // 👇 409 Conflict 에러(사용자 중복)를 받았을 때
     if (error.response && error.response.status === 409) {
       // 에러 정보를 state에 담아 새로운 페이지로 이동
-      router.push({ 
-        name: 'registrationFailed', 
-        state: { errorInfo: error.response.data } 
+      router.push({
+        name: 'registrationFailed',
+        state: { errorInfo: error.response.data }
       });
     } else {
       // 그 외 다른 에러는 기존처럼 처리
@@ -389,9 +361,11 @@ const handleRegister = async () => {
   display: flex;
   gap: 10px;
 }
+
 .input-with-button input {
   flex-grow: 1;
 }
+
 .inline-button {
   padding: 0 15px;
   border-radius: 5px;
@@ -400,36 +374,46 @@ const handleRegister = async () => {
   cursor: pointer;
   white-space: nowrap;
 }
+
 .inline-button:disabled {
   cursor: not-allowed;
   background-color: #e9ecef;
   color: #adb5bd;
 }
+
 .success-text {
-  color: green; /* ... */
+  color: green;
+  /* ... */
 }
+
 .error-text {
-  color: red; /* ... */
+  color: red;
+  /* ... */
 }
+
 .info-text {
   /* 기본 안내 메시지 스타일 */
   font-size: 12px;
   margin-top: 5px;
   color: #007bff;
 }
+
 .verification-message {
   font-size: 12px;
   margin-top: 5px;
   color: #007bff;
 }
+
 .auth-wrapper.reverse {
   flex-direction: row-reverse;
 }
+
 .auth-wrapper {
   display: flex;
   min-height: 100vh;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
+
 .form-container {
   flex: 1;
   display: flex;
@@ -438,10 +422,12 @@ const handleRegister = async () => {
   padding: 40px;
   background-color: #fff;
 }
+
 .form-content {
   width: 100%;
   max-width: 420px;
 }
+
 .image-container {
   flex: 1;
   position: relative;
@@ -450,31 +436,37 @@ const handleRegister = async () => {
   align-items: center;
   background-color: #f0f0f0;
 }
+
 .image-container img {
   width: 85%;
   height: 85%;
   object-fit: cover;
   border-radius: 20px;
 }
+
 h1 {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 8px;
 }
+
 .subtitle {
   font-size: 16px;
   color: #666;
   margin-bottom: 30px;
 }
+
 .input-group {
   margin-bottom: 20px;
 }
+
 .input-group label {
   display: block;
   font-size: 14px;
   color: #333;
   margin-bottom: 8px;
 }
+
 .input-group input {
   width: 100%;
   padding: 12px 15px;
@@ -483,6 +475,7 @@ h1 {
   font-size: 16px;
   box-sizing: border-box;
 }
+
 .options {
   display: flex;
   justify-content: flex-start;
@@ -490,17 +483,21 @@ h1 {
   font-size: 14px;
   margin-bottom: 25px;
 }
+
 .remember-me {
   display: flex;
   align-items: center;
 }
+
 .remember-me input {
   margin-right: 8px;
 }
+
 .remember-me label {
   color: #555;
   text-decoration: none;
 }
+
 .auth-button {
   width: 100%;
   padding: 15px;
@@ -513,22 +510,27 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s;
 }
+
 .auth-button:hover {
   background-color: #57b3a0;
 }
+
 .switch-auth {
   text-align: center;
   margin-top: 20px;
   font-size: 14px;
 }
+
 .switch-auth a {
   color: #68c9b4;
   font-weight: bold;
   text-decoration: none;
 }
+
 .switch-auth a:hover {
   text-decoration: underline;
 }
+
 .dots {
   position: absolute;
   bottom: 5%;
@@ -537,12 +539,14 @@ h1 {
   display: flex;
   gap: 8px;
 }
+
 .dot {
   width: 8px;
   height: 8px;
   background-color: #ccc;
   border-radius: 50%;
 }
+
 .dot.active {
   background-color: #fff;
 }
@@ -554,7 +558,9 @@ h1 {
 }
 
 .auth-button.disabled-button {
-  background-color: #a0aec0; /* 회색톤으로 변경 */
-  cursor: not-allowed; /* 마우스 커서 변경 */
+  background-color: #a0aec0;
+  /* 회색톤으로 변경 */
+  cursor: not-allowed;
+  /* 마우스 커서 변경 */
 }
 </style>
