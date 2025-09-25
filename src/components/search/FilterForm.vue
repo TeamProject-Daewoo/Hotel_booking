@@ -255,7 +255,7 @@ watch(
 );
 </script>
 
-<style>
+<style scoped>
 /* 필터 컨테이너 전체 스타일 */
 .filter-main-container {
     border-radius: 8px;

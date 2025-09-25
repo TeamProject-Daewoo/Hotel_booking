@@ -130,7 +130,7 @@
   </div>
 </div>
 
-          <button type="submit" class="auth-button" :disabled="!isFormValid">
+          <button type="submit" class="auth-button" :disabled="!isFormValid" :class="{ 'disabled-button': !isFormValid }">
             계정 생성
           </button>
         </form>
@@ -288,8 +288,16 @@ const passwordsMatch = computed(() => {
 
 // 최종 폼 유효성 검사 (계정 생성 버튼 활성화 조건)
 const isFormValid = computed(() => {
+  const requiredFields = [
+    formData.user_name,
+    formData.password,
+    formData.confirmPassword,
+    formData.name,
+    formData.phone
+  ];
+  const allFieldsFilled = requiredFields.every(field => field && field.trim() !== '');
   // 이메일 인증이 완료되었고, 비밀번호가 일치하며, 약관에 동의했는지 확인
-  return passwordsMatch.value && isEmailVerified.value && formData.agree;
+  return allFieldsFilled && passwordsMatch.value && isEmailVerified.value && formData.agree;
 });
 
 // 인증번호 확인 함수
@@ -543,5 +551,10 @@ h1 {
   color: #007bff;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.auth-button.disabled-button {
+  background-color: #a0aec0; /* 회색톤으로 변경 */
+  cursor: not-allowed; /* 마우스 커서 변경 */
 }
 </style>
